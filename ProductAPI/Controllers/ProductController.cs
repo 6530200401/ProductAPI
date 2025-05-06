@@ -10,14 +10,24 @@ namespace ProductAPI.Controllers
     public class ProductController : ControllerBase
     {
         private readonly string _json = "DB/MOCK_DATA.json";
+        //private readonly IProduct _ProductRepo;
+        //private readonly ILogger<ProductController> _logger;
+        //
+        //public ProductController(IProduct productRepoObj)
+        //{
+        //    _ProductRepo = productRepoObj;
+        //}
 
         [HttpGet]
         public ActionResult<IEnumerable<Product>> GetAllProduct()
         {
+            //var products = _db.Products.ToList();
             var jsonProduct = System.IO.File.ReadAllText(_json);
             var products = JsonConvert.DeserializeObject<List<Product>>(jsonProduct);
 
             return Ok(products);
+
+            //_logger.Log
         }
 
         [HttpGet("{id}")]
