@@ -1,0 +1,102 @@
+[
+  {
+    "ProductId": 1,
+    "Name": "Steampan - Lid For Half Size",
+    "Price": 798.39
+  },
+  {
+    "ProductId": 2,
+    "Name": "Bread - Ciabatta Buns",
+    "Price": 693.54
+  },
+  {
+    "ProductId": 3,
+    "Name": "Lettuce - Spring Mix",
+    "Price": 901.39
+  },
+  {
+    "ProductId": 4,
+    "Name": "Vermacelli - Sprinkles, Assorted",
+    "Price": 732.44
+  },
+  {
+    "ProductId": 5,
+    "Name": "Bay Leaf Ground",
+    "Price": 282.12
+  },
+  {
+    "ProductId": 6,
+    "Name": "Mix - Cocktail Strawberry Daiquiri",
+    "Price": 271.15
+  },
+  {
+    "ProductId": 7,
+    "Name": "Bread - Rolls, Corn",
+    "Price": 841.52
+  },
+  {
+    "ProductId": 8,
+    "Name": "Cake - Bande Of Fruit",
+    "Price": 573.52
+  },
+  {
+    "ProductId": 9,
+    "Name": "Jam - Raspberry,jar",
+    "Price": 952.93
+  },
+  {
+    "ProductId": 10,
+    "Name": "Pastrami",
+    "Price": 699.54
+  },
+  {
+    "ProductId": 11,
+    "Name": "Mix Pina Colada",
+    "Price": 118.32
+  },
+  {
+    "ProductId": 12,
+    "Name": "Beef - Rib Eye Aaa",
+    "Price": 885.23
+  },
+  {
+    "ProductId": 13,
+    "Name": "Island Oasis - Banana Daiquiri",
+    "Price": 297.53
+  },
+  {
+    "ProductId": 14,
+    "Name": "Tia Maria",
+    "Price": 730.62
+  },
+  {
+    "ProductId": 15,
+    "Name": "Stock - Fish",
+    "Price": 785.78
+  },
+  {
+    "ProductId": 16,
+    "Name": "Coffee - Flavoured",
+    "Price": 466.08
+  },
+  {
+    "ProductId": 17,
+    "Name": "Grand Marnier",
+    "Price": 186.06
+  },
+  {
+    "ProductId": 18,
+    "Name": "Petite Baguette",
+    "Price": 999.09
+  },
+  {
+    "ProductId": 19,
+    "Name": "Oyster - In Shell",
+    "Price": 104.59
+  },
+  {
+    "ProductId": 20,
+    "Name": "Muffin - Mix - Creme Brule 15l",
+    "Price": 726.92
+  }
+]
