@@ -1,7 +1,6 @@
 ﻿using ProductAPI.Models;
 using Microsoft.AspNetCore.Mvc;
-using Newtonsoft.Json;
-//using ProductAPI.Interfaces;
+using ProductAPI.Interfaces;
 
 namespace ProductAPI.Controllers
 {
@@ -10,97 +9,105 @@ namespace ProductAPI.Controllers
     public class ProductController : ControllerBase
     {
         private readonly string _json = "DB/MOCK_DATA.json";
+        private readonly IManageProduct _ProductService;
+        //private readonly ILogger<ProductController> _logger;
+
+        public ProductController(IManageProduct ProductService) { 
+            _ProductService = ProductService;
+        }
 
         [HttpGet]
-        public ActionResult<IEnumerable<Product>> GetAllProduct()
+        public IActionResult GetAllProduct()
         {
-            var jsonProduct = System.IO.File.ReadAllText(_json);
-            var products = JsonConvert.DeserializeObject<List<Product>>(jsonProduct);
+            try
+            {
+                return Ok(_ProductService.GetAllProduct());
+            }
+            catch (Exception) { 
+                return BadRequest("เกิดข้อผิดพลาด");
+            }
 
-            return Ok(products);
+            //_logger.Log
         }
 
         [HttpGet("{id}")]
         public IActionResult getProductById(int id)
         {
-            var jsonProduct = System.IO.File.ReadAllText(_json);
-            var products = JsonConvert.DeserializeObject<List<Product>>(jsonProduct);
-
-            var existProduct = products.FirstOrDefault(p => p.ProductId == id);
-            if (existProduct == null)
+            try
             {
-                return NoContent();
+                var response = _ProductService.GetProductById(id);
+                if (response == null)
+                {
+                    return NoContent();
+                }
+                return Ok(response);
             }
-            return Ok(existProduct);
+            catch(Exception)
+            {
+                return BadRequest("เกิดข้อผิดพลาด");
+            }
+           
         }
 
         [HttpPost]
         public IActionResult addProduct(NewProduct obj)
         {
-            if (ModelState.IsValid)
+            try
             {
-                var jsonProduct = System.IO.File.ReadAllText(_json);
-                var products = JsonConvert.DeserializeObject<List<Product>>(jsonProduct) ?? new List<Product>();
-                int lastProductId = products.Max(p => p.ProductId);
-
-                var newProductObj = new Product
+                if (ModelState.IsValid)
                 {
-                    ProductId = lastProductId + 1,
-                    Name = obj.Name,
-                    Price = obj.Price
-                };
-                products.Add(newProductObj);
+                    _ProductService.addProduct(obj);
 
-                var updatedJson = JsonConvert.SerializeObject(products, Formatting.Indented);
-                System.IO.File.WriteAllText(_json, updatedJson);
-
-                return Ok();
+                    return Ok();
+                }
+                return BadRequest(ModelState);
             }
-            return BadRequest(ModelState);
+            catch(Exception)
+            {
+                return BadRequest("เกิดข้อผิดพลาด");
+            }
         }
 
         [HttpPut("{id}")]
         public IActionResult editProduct(int id, NewProduct obj)
         {
-            if (ModelState.IsValid)
+            try
             {
-                var jsonProduct = System.IO.File.ReadAllText(_json);
-                var products = JsonConvert.DeserializeObject<List<Product>>(jsonProduct) ?? new List<Product>();
-
-                var existProduct = products.FirstOrDefault(p => p.ProductId == id);
-                if (existProduct == null)
+                if (ModelState.IsValid)
                 {
-                    return NotFound();
+                    bool response = _ProductService.editProduct(id, obj);
+
+                    if (response)
+                    {
+                        return Ok();
+                    }
+                    return NoContent() ;
                 }
-
-                existProduct.Name = obj.Name;
-                existProduct.Price = obj.Price;
-
-                var updatedJson = JsonConvert.SerializeObject(products, Formatting.Indented);
-                System.IO.File.WriteAllText(_json, updatedJson);
-                return NoContent();
+                return BadRequest();
             }
-            return BadRequest();
+            catch(Exception) 
+            { 
+                return BadRequest("เกิดข้อผิดพลาด"); 
+            }
         }
 
         [HttpDelete("{id}")]
         public IActionResult deleteProduct(int id)
         {
-
-            var jsonProduct = System.IO.File.ReadAllText(_json);
-            var products = JsonConvert.DeserializeObject<List<Product>>(jsonProduct) ?? new List<Product>();
-
-            var existProduct = products.FirstOrDefault(p => p.ProductId == id);
-            if (existProduct == null)
+            try
             {
+                bool response = _ProductService.deleteProduct(id);
+                if (response)
+                {
+                    return Ok();
+                }
                 return NoContent();
             }
 
-            products.Remove(existProduct);
-            var updatedJson = JsonConvert.SerializeObject(products, Formatting.Indented);
-            System.IO.File.WriteAllText(_json, updatedJson);
-
-            return Ok();
+            catch (Exception)
+            {
+                return BadRequest("เกิดข้อผิดพลาด");
+            }
         }
     }
 }
