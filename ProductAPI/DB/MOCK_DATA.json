@@ -93,5 +93,10 @@
     "ProductId": 20,
     "Name": "Muffin - Mix - Creme Brule 15l",
     "Price": 726.92
+  },
+  {
+    "ProductId": 21,
+    "Name": "TV",
+    "Price": 4000.0
   }
 ]
